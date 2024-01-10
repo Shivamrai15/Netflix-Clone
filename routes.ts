@@ -4,7 +4,7 @@
 export const AuthRoutes = [
     "/",
     "/login",
-    "/sign-up/registrayion",
+    "/sign-up/registration",
     "/sign-up/regform",
     "/sign-up/profile",
 ]
