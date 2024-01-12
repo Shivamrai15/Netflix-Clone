@@ -21,5 +21,35 @@ model User {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   name       String?
+  myList     String[] @db.ObjectId
   isVerified Boolean  @default(false)
+}
+
+enum Genre {
+  ACTION
+  ADVENTURE
+  ANIMATION
+  BIOGRAPHY
+  COMEDY
+  CRIME
+  DRAMA
+  FANTASY
+  HORROR
+  MYSTERY
+  ROMANCE
+  SCIFI
+  THRILLER
+}
+
+model Movies {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  trailer     String
+  url         String
+  description String
+  thumbnail   String
+  billboard   String
+  genre       Genre[]
+  release     DateTime
+  duration    String
 }
