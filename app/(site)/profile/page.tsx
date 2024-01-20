@@ -1,12 +1,17 @@
 "use client";
+import { useRouter } from "@/hooks/useRouter";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const ProfilePage = () => {
 
     const session = useSession();
-    const router = useRouter();
+    const { setPropogation } = useRouter();
+
+    const handleRouting = ()=>{
+        setPropogation(70);
+    }
 
     return (
         <div className="h-full w-full bg-neutral-900 flex items-center justify-center">
@@ -15,7 +20,9 @@ const ProfilePage = () => {
                     Who's watching?
                 </h1>
                 <div className="flex items-center justify-center gap-8 mt-10">
-                    <div onClick={()=>router.push("/browse")}>
+                    <Link
+                        href="/browse" 
+                        onClick={handleRouting}>
                         <div className="group flex-row">
                             <div
                                 className="w-36 h-36 rounded-md flex items-center justify-center border-2 border-transparent group-hover:cursor-pointer group-hover:border-white overflow-hidden transition relative"
@@ -31,7 +38,7 @@ const ProfilePage = () => {
                                 {session.data?.user?.name || "User"}
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
         </div>

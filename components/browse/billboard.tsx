@@ -36,6 +36,8 @@ export const BillBoard = ({
                     <div className="flex items-center gap-x-2 text-zinc-400 font-light mt-5">
                         <p>{new Date(movie.release).getFullYear()}</p>
                         <span className="block h-4 w-0.5 bg-zinc-400 rounded-md"/>
+                        <p>{movie.duration}</p>
+                        <span className="block h-4 w-0.5 bg-zinc-400 rounded-md"/>
                         <p>{movie.genre[0]}</p>
                     </div>
                     <p className="text-white text-[15px] mt-5 md:w-[70%] lg:w-[50%]">
@@ -63,6 +65,8 @@ export const BillBoard = ({
                 </h2>
                 <div className="flex items-center gap-x-2 text-zinc-400 font-light mt-3">
                         <p>{new Date(movie.release).getFullYear()}</p>
+                        <span className="block h-4 w-0.5 bg-zinc-400 rounded-md"/>
+                        <p>{movie.duration}</p>
                         <span className="block h-4 w-0.5 bg-zinc-400 rounded-md"/>
                         <p>{movie.genre[0]}</p>
                 </div>

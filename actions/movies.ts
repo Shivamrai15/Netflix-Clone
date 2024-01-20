@@ -31,3 +31,16 @@ export const moviesByGenre = async(genre : Genre)=>{
         return []
     }
 }
+
+export const getMovieByID = async(id : string)=>{
+    try {
+        const movie = await db.movies.findUnique({
+            where : {
+                id
+            }
+        });
+        return movie;
+    } catch (error) {
+        return null;
+    }
+}
