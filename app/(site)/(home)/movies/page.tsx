@@ -1,12 +1,35 @@
 import { MoviesByGenre } from "@/components/movies/movies-by-genre";
 import { cn } from "@/lib/utils";
 import { Genre } from "@prisma/client";
+import { Metadata } from "next";
 import { Poppins } from "next/font/google";
 
 const font = Poppins({
     weight : ["900"],
     subsets : ["latin"]
 })
+
+export const metadata : Metadata = {
+    title : "Movies | Netflix",
+    keywords : [
+        "watch movies",
+        "movies online",
+        "watch TV",
+        "TV online",
+        "TV shows online",
+        "watch TV shows",
+        "stream movies",
+        "stream tv",
+        "instant streaming",
+        "watch online",
+        "movies",
+        "watch movies India",
+        "watch TV online",
+        "no download",
+        "full length movies"
+    ],
+    description : "Movies move us like nothing else can, whether they’re scary, funny, dramatic, romantic or anywhere in-between. So many titles, so much to experience."
+}
 
 const page = () => {
     return (

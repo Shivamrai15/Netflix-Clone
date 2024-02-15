@@ -14,7 +14,7 @@ const BrowseLayout = ({
     children
 } : BrowseLayoutProps) => {
     return (
-        <div className="h-full bg-neutral-900">
+        <div className="min-h-full bg-neutral-900">
             <Navbar/>
             {children}
         </div>

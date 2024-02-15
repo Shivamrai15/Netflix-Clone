@@ -7,16 +7,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Gender {
-  MALE
-  FEMALE
-}
-
 model User {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   email      String   @unique
   password   String
-  gender     Gender?
   image      String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -44,12 +38,63 @@ enum Genre {
 model Movies {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
-  trailer     String
-  url         String
-  description String
+  imdb        Float
+  rating      String?
+  cast        String[]
+  release     DateTime
+  clip        String
   thumbnail   String
-  billboard   String
+  logo        String
+  clipImage   String
+  description String
+  url         String
+  length      String
+  genre       Genre[]
+}
+
+model Series {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  imdb        Float
+  rating      String?
+  cast        String[]
+  thumbnail   String
+  logo        String
+  description String
   genre       Genre[]
   release     DateTime
-  duration    String
+  seasons     Season[]
+  videos      Video[]
+}
+
+model Season {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  number      Int
+  release     DateTime
+  description String
+  episodes    Episode[]
+  seriesId    String    @db.ObjectId
+  series      Series    @relation(fields: [seriesId], references: [id])
+}
+
+model Episode {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  number      Int
+  seasonId    String @db.ObjectId
+  season      Season @relation(fields: [seasonId], references: [id])
+  name        String
+  description String
+  length      String
+  thumbnail   String
+  url         String
+}
+
+model Video {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  image    String
+  url      String
+  seriesId String @db.ObjectId
+  series   Series @relation(fields: [seriesId], references: [id])
 }

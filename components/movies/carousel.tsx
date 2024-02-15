@@ -35,7 +35,7 @@ export const CarouselSlider = ({
                         key={movie.id}
                         className="basis-1/2 md:basis-1/4 xl:basis-1/5 h-40 sm:h-44 md:h-52 lg:h-60 xl:h-64 w-48 md:w-72 relative md:cursor-pointer"
                     >
-                        <Image src={movie.billboard} fill className="object-contain" alt="Thumbnail"/>
+                        <Image src={movie.thumbnail} fill className="object-contain" alt="Thumbnail"/>
                     </CarouselItem>
                 ))}
                 

@@ -2,6 +2,7 @@ import { Movies } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { Info } from "lucide-react";
 import Image from "next/image";
+import { PlayButton } from "./play-button";
 
 interface BillBoardProps {
     movie : Movies;
@@ -18,13 +19,13 @@ export const BillBoard = ({
                     autoPlay
                     muted
                     loop
-                    poster={movie.billboard}
-                    src={movie.trailer}>
+                    poster={movie.thumbnail}
+                    src={movie.clip}>
                 </video>
                 <div className="hidden md:absolute md:block md:bottom-6 lg:bottom-10 ml-4 md:ml-16">
                     <div className="relative w-52 h-36 lg:w-72 lg:h-44 xl:w-80 xl:h-48">
                         <Image
-                            src={movie.thumbnail}
+                            src={movie.logo}
                             fill
                             alt="name"
                             className="object-contain bg-blend-color-dodge"
@@ -36,7 +37,7 @@ export const BillBoard = ({
                     <div className="flex items-center gap-x-2 text-zinc-400 font-light mt-5">
                         <p>{new Date(movie.release).getFullYear()}</p>
                         <span className="block h-4 w-0.5 bg-zinc-400 rounded-md"/>
-                        <p>{movie.duration}</p>
+                        <p>{movie.length}</p>
                         <span className="block h-4 w-0.5 bg-zinc-400 rounded-md"/>
                         <p>{movie.genre[0]}</p>
                     </div>
@@ -44,6 +45,7 @@ export const BillBoard = ({
                         {movie.description}
                     </p>
                     <div className="flex flex-row items-center mt-4 gap-3">
+                        <PlayButton movieId={movie.id} />
                         <Button className="bg-white/25 hover:bg-white/20" size="sm">
                             <Info className="mr-2"/>
                             More Info
@@ -54,7 +56,7 @@ export const BillBoard = ({
             <div className="flex flex-col mt-4 md:hidden px-4">
                 <div className="w-[50vw] h-32 relative flex justify-start">
                     <Image
-                        src={movie.thumbnail}
+                        src={movie.logo}
                         fill
                         alt="name"
                         className="object-contain bg-blend-color-dodge"
@@ -66,7 +68,7 @@ export const BillBoard = ({
                 <div className="flex items-center gap-x-2 text-zinc-400 font-light mt-3">
                         <p>{new Date(movie.release).getFullYear()}</p>
                         <span className="block h-4 w-0.5 bg-zinc-400 rounded-md"/>
-                        <p>{movie.duration}</p>
+                        <p>{movie.length}</p>
                         <span className="block h-4 w-0.5 bg-zinc-400 rounded-md"/>
                         <p>{movie.genre[0]}</p>
                 </div>
@@ -74,6 +76,7 @@ export const BillBoard = ({
                     {movie.description}
                 </p>
                 <div className="flex flex-row items-center mt-4 gap-3">
+                        <PlayButton movieId={movie.id} />
                         <Button className="bg-white/25 hover:bg-white/20" size="sm">
                             <Info className="mr-2"/>
                             More Info

@@ -24,6 +24,7 @@ export default async function RootLayout({
     return (
         <SessionProvider session={session}>
             <html lang="en">
+                <link rel="icon" href="/favicon.ico" sizes="any" />
                 <body className={inter.className}>
                     <Toaster position="bottom-right"/>
                     {children}

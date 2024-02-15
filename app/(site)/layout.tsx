@@ -29,7 +29,7 @@ const LayoutPage = ({
                 setPropogation(0);
                 }}
             />
-            <div className="h-full">{children}</div>
+            <div className="h-full bg-neutral-900">{children}</div>
         </>
     )
 }

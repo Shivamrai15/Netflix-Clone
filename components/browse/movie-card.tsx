@@ -1,7 +1,6 @@
 "use client";
 
 import { Movies } from "@prisma/client";
-import { Check } from "lucide-react";
 import Image from "next/image";
 import { FaPlay } from "react-icons/fa";
 import { MovieCardGerne } from "./movie-card-genre";
@@ -17,15 +16,15 @@ export const MovieCard = ({
     return (
         <div className="group bg-neutral-900 col-span-1 relative h-[24vw] md:h-[18vw] lg:h-[12vw] xl:h-[11vw]">
             <Image
-                src={data.billboard}
+                src={data.thumbnail}
                 alt="Thumbnail"
                 fill
                 className="object-cover cursor-pointer transition shadow-xl rounded-md group-hover:opacity-90 sm:group-hover:opacity-0 delay-150"
             />
             <div className="absolute left-3 bottom-3 transition group-hover:opacity-90 sm:group-hover:opacity-0 delay-150">
                 <Image
-                    src={data.thumbnail}
-                    alt="thumbnail"
+                    src={data.logo}
+                    alt="logo"
                     height={150}
                     width={150}
                 />
@@ -33,13 +32,13 @@ export const MovieCard = ({
             <div className="opacity-0 absolute top-0 transition-all duration-200 z-10 invisible sm:visible delay-150 w-full scale-0 group-hover:scale-110 group-hover:-translate-y-[6vw] group-hover:opacity-100">
                 <div className="relative">
                     <img
-                        src={data.billboard}
+                        src={data.thumbnail}
                         alt="Thumbnail"
                         className="cursor-pointer object-cover transition duration-0 shadow-xl rounded-t-md w-full h-[24vw] md:h-[18vw]  lg:h-[12vw] xl:h[11vw]"
                     />
                     <div className="absolute bottom-3 left-3">
                         <Image
-                            src={data.thumbnail}
+                            src={data.logo}
                             alt="thumbnail"
                             height={150}
                             width={150}
@@ -57,7 +56,7 @@ export const MovieCard = ({
                         <FavMovieButton id={data.id} />
                     </div>
                     <div className="flex flex-row mt-3 gap-2 items-center">
-                        <p className="text-white text-sm">{data.duration}</p>
+                        <p className="text-white text-sm">{data.length}</p>
                     </div>
                     <div className="flex flex-row mt-3 gap-2 items-center">
                         <MovieCardGerne genre={data.genre}/>
