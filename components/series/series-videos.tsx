@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { FaPlay } from "react-icons/fa";
 import { Video } from "@prisma/client";
@@ -8,6 +9,7 @@ import {
     CarouselContent,
     CarouselItem
 } from "@/components/ui/carousel";
+import { usePlayerModal } from "@/hooks/use-player-modal";
 
 interface SeriesVideosProps {
     title : string;
@@ -21,6 +23,17 @@ export const SeriesVideos = ({
     
     if (videos.length === 0) {
         return null;
+    }
+
+    const { onOpen, setData } = usePlayerModal();
+
+    const handleVideoPlay = ( title: string, url: string, poster: string ) => {
+        setData(
+            title,
+            url,
+            poster
+        );
+        onOpen();
     }
     
     return (
@@ -55,7 +68,10 @@ export const SeriesVideos = ({
                                         alt="Movie"
                                         fill
                                     />
-                                    <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white absolute bottom-3 left-3 md:bottom-6 md:left-6">
+                                    <div
+                                        onClick={()=>handleVideoPlay(video.name, video.url, video.image)}
+                                        className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white absolute bottom-3 left-3 md:bottom-6 md:left-6"
+                                    >
                                         <FaPlay className="h-5 w-5" />
                                     </div>
                                 </div>

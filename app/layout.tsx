@@ -4,6 +4,7 @@ import './globals.css'
 import { Toaster } from 'sonner';
 import { SessionProvider } from 'next-auth/react';
 import { auth } from '@/auth';
+import { ModalProvider } from '@/providers/modal-provider';
 
 
 const inter = Inter({ subsets: ['latin'] });
@@ -26,6 +27,7 @@ export default async function RootLayout({
             <html lang="en">
                 <link rel="icon" href="/favicon.ico" sizes="any" />
                 <body className={inter.className}>
+                    <ModalProvider />
                     <Toaster position="bottom-right"/>
                     {children}
                 </body>

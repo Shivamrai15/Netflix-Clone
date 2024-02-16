@@ -1,7 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import { FaPlay } from "react-icons/fa";
 import { Movies } from "@prisma/client";
 import { Separator } from "@/components/ui/separator";
+import { usePlayerModal } from "@/hooks/use-player-modal";
+import { title } from "process";
 
 interface MovieVideosProps {
     data : Movies
@@ -10,6 +14,18 @@ interface MovieVideosProps {
 export const MovieVideos = ({
     data
 } : MovieVideosProps) => {
+
+    const {onOpen, setData} = usePlayerModal();
+
+    const handleVideoPlayer = () => {
+        setData(
+            `Trailer: ${data.name}`,
+            data.clip,
+            data.clipImage
+        );
+        onOpen();
+    }
+
     return (
         <div className="mt-20 px-4 md:px-6 lg:px-16">
             <div className="flex items-center gap-x-4 flex-wrap">
@@ -29,7 +45,10 @@ export const MovieVideos = ({
                     alt="Movie"
                     fill
                 />
-                <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white absolute bottom-3 left-3 md:bottom-6 md:left-6">
+                <div
+                    onClick={handleVideoPlayer}
+                    className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white absolute bottom-3 left-3 md:bottom-6 md:left-6"
+                >
                     <FaPlay className="h-5 w-5" />
                 </div>
             </div>
