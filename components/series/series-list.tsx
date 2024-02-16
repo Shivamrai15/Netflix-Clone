@@ -1,8 +1,9 @@
-"use client";
 
-interface CrousalProps {
-    data : Movies[]
-}
+import Image from "next/image";
+import Link from "next/link";
+import { toTitle } from "@/lib/utils";
+import { Genre } from "@prisma/client";
+import { getSeriesByGenre } from "@/actions/series";
 
 import {
     Carousel,
@@ -10,18 +11,27 @@ import {
     CarouselItem,
     CarouselNext
 } from "@/components/ui/carousel";
-import Image from "next/image";
-import { Movies } from "@prisma/client";
-import { useRouter } from "next/navigation";
 
-export const CarouselSlider = ({
-    data
-} : CrousalProps) => {
+interface SeriesListProps {
+    genre : Genre;
+}
 
-    const router = useRouter();
+
+export const SeriesList = async({
+    genre
+} : SeriesListProps) => {
+
+    const series = await getSeriesByGenre(genre);
+
+    if (!series){
+        return null;
+    }
 
     return (
-        <Carousel
+        <div className="w-full px-4 md:px-6 lg:px-16">
+            <h1 className="text-lg md:text-[20px] text-white">{toTitle(genre)} Tv Shows</h1>
+            <div className="w-full mt-3">
+                <Carousel
                     className="h-full w-ful"
                     opts={{
                         align: "start",
@@ -29,14 +39,14 @@ export const CarouselSlider = ({
                 >
                     <CarouselContent className="space-x-2" >
                         {
-                            data.map((item) => (
+                            series.map((item) => (
                                 <CarouselItem
                                     key={item.id}
                                     className="basis-auto md:cursor-pointer"
-                                    onClick={() => router.push(`/title/${item.id}`)}
                                 >
-                                    <div
+                                    <Link
                                         className="overflow-hidden"
+                                        href={`/series/${item.id}`}
                                     >
                                         <div className="aspect-video relative h-36 sm:h-40 md:h-52 lg:h-44 overflow-hidden">
                                             <Image
@@ -46,12 +56,14 @@ export const CarouselSlider = ({
                                             />
                                         </div>
                                         <h4 className="text-sm md:text-base text-center text-white mt-2" >{item.name}</h4>
-                                    </div>
+                                    </Link>
                                 </CarouselItem>
                             ))
                         }
                     </CarouselContent>
                     <CarouselNext className="hidden bg-transparent border-0 text-red-500 md:cursor-pointer lg:block"/>
                 </Carousel>
+            </div>
+        </div>
     )
 }

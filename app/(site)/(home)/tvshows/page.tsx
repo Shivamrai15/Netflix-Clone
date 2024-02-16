@@ -1,4 +1,4 @@
-import { MoviesByGenre } from "@/components/movies/movies-by-genre";
+import { SeriesList } from "@/components/series/series-list";
 import { cn } from "@/lib/utils";
 import { Genre } from "@prisma/client";
 import { Metadata } from "next";
@@ -10,7 +10,7 @@ const font = Poppins({
 })
 
 export const metadata : Metadata = {
-    title : "Movies | Netflix Official Site",
+    title : "TV Shows | Netflix Official Site",
     keywords : [
         "watch movies",
         "movies online",
@@ -28,30 +28,28 @@ export const metadata : Metadata = {
         "no download",
         "full length movies"
     ],
-    description : "Movies move us like nothing else can, whether they’re scary, funny, dramatic, romantic or anywhere in-between. So many titles, so much to experience."
+    description : "These days, the small screen has some very big things to offer. From sitcoms to dramas to travel and talk shows, these are all the best programs on TV."
 }
 
-const page = async() => {
+const TvShowsPage = async() => {
     return (
-        <div className="w-full bg-neutral-900 pt-20 md:pt-28 lg:pt-36 space-y-6 md:space-y-10 lg:space-y-12">
+        <div className="w-full bg-neutral-900 py-20 md:py-28 lg:py-36 space-y-6 md:space-y-10 lg:space-y-12">
             <div className="flex flex-col max-w-2xl lg:max-w-3xl px-4 md:px-6 lg:px-16 space-y-3">
                 <h1 className={cn(
                     "text-4xl lg:text-6xl font-extrabold text-white",
                     font.className
-                )}>Movies</h1>
+                )}>TV Shows</h1>
                 <p className="text-sm md:text-lg text-white">
-                    Movies move us like nothing else can, whether they’re scary, funny, dramatic, romantic or anywhere in-between. So many titles, so much to experience.
+                    These days, the small screen has some very big things to offer. From sitcoms to dramas to travel and talk shows, these are all the best programs on TV.
                 </p>
             </div>
-            <MoviesByGenre genre={Genre.ACTION}/>
-            <MoviesByGenre genre={Genre.HORROR}/>
-            <MoviesByGenre genre={Genre.ANIMATION}/>
-            <MoviesByGenre genre={Genre.COMEDY}/>
-            <MoviesByGenre genre={Genre.ADVENTURE}/>
-            <MoviesByGenre genre={Genre.SCIFI}/>
-
+            <SeriesList genre={Genre.CRIME} />
+            <SeriesList genre={Genre.FANTASY} />
+            <SeriesList genre={Genre.ACTION} />
+            <SeriesList genre={Genre.ADVENTURE} />
+            <SeriesList genre={Genre.DRAMA} />
         </div>
     )
 }
 
-export default page
+export default TvShowsPage;

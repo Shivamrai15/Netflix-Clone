@@ -20,7 +20,7 @@ export async function generateMetadata(
     const previousImages = (await parent).openGraph?.images || []
    
     return {
-        title: `Watch ${movie?.name} | Netflix`,
+        title: `Watch ${movie?.name} | Netflix Official Site`,
         keywords : [
             "watch movies",
             "movies online",
@@ -45,7 +45,7 @@ export async function generateMetadata(
         },
         twitter : {
             card: 'summary_large_image',
-            title: `Watch ${movie?.name} | Netflix`,
+            title: `Watch ${movie?.name} | Netflix Official Site`,
             description : movie?.description,
             images: [movie?.thumbnail || ""], 
         },
