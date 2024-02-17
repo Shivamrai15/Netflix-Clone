@@ -66,3 +66,47 @@ export const getOnlySeries = async ( id: string ) => {
         return null;
     }
 }
+
+export const getSeries = async () => {
+    try {
+        
+        const series = await db.series.findMany({
+            where : {
+                imdb : {
+                    gt : 6
+                }
+            },
+            include : {
+                seasons: true
+            },
+            orderBy : {
+                imdb : "desc"
+            },
+            take : 4
+        });
+
+        return series;
+
+    } catch (error) {
+        return null;
+    }
+}
+
+export const getSeriesWithSeasonsById = async (id : string) => {
+    try {
+        
+        const series = await db.series.findUnique({
+            where : {
+                id 
+            },
+            include : {
+                seasons: true
+            }
+        });
+
+        return series;
+
+    } catch (error) {
+        return null;
+    }
+}

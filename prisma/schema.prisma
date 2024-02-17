@@ -15,7 +15,7 @@ model User {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   name       String?
-  myList     String[] @db.ObjectId
+  myList     MyList[]
   isVerified Boolean  @default(false)
 }
 
@@ -97,4 +97,16 @@ model Video {
   url      String
   seriesId String @db.ObjectId
   series   Series @relation(fields: [seriesId], references: [id])
+}
+
+model MyList {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  contentId String   @db.ObjectId
+  userId    String   @db.ObjectId
+  isSeries  Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, contentId])
 }

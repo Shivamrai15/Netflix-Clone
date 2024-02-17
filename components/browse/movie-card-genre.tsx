@@ -8,7 +8,7 @@ export const MovieCardGerne = ({
     genre
 } : MovieCardGerneProps) => {
   return (
-    <div className="w-full flex items-center justify-start gap-x-1 text-zinc-300 text-sm">
+    <div className="w-full flex items-center justify-start gap-x-1 text-zinc-300 text-xs">
         {genre.map((genr, idx)=>(
             <div key={idx} className="flex flex-row items-center gap-x-1">
                 {genr}

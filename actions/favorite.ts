@@ -1,10 +1,9 @@
 "use server";
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
-import { without } from "lodash";
 
 
-export const addToFavoriteMovies = async( id : string )=>{
+export const addToMyList = async( id : string, isSeries: boolean )=>{
     try {
 
         const session = await auth();
@@ -13,76 +12,70 @@ export const addToFavoriteMovies = async( id : string )=>{
         }
 
         const userId = session.user?.id;
-        const movie = await db.movies.findUnique({
-            where :{
-                id
-            }
-        });
 
-        if (!movie){
+        if (!userId) {
             return null;
         }
 
-        const user = await db.user.update({
-            where : {
-                id : userId
-            },
+        const myList = await db.myList.create({
             data : {
-                myList : {
-                    push : movie.id
+                contentId : id,
+                isSeries,
+                userId
+            }
+        });
+
+        return myList;
+
+    } catch (error) {
+        return null;
+    }
+}
+
+export const removeFromMyList = async ( id: string ) => {
+    try {
+        
+        const session = await auth();
+        if (!session || !session.user || !session.user.id){
+            return null;
+        }
+
+        const myList = await db.myList.delete({
+            where : {
+                userId_contentId : {
+                    userId : session.user.id,
+                    contentId : id
                 }
             }
         });
 
-        return user;
+        return myList;
 
     } catch (error) {
         return null;
     }
 }
 
-export const removeFromFavoriteMovies = async (id : string) => {
+export const getMyList = async() => {
     try {
+        
         const session = await auth();
-        if (!session){
+        if (!session || !session.user || !session.user.id){
             return null;
         }
 
-        const userId = session.user?.id;
-        const movie = await db.movies.findUnique({
-            where :{
-                id
-            }
-        });
-
-        if (!movie){
-            return null;
-        }
-
-        const user = await db.user.findUnique({
-            where :{
-                id: userId
-            }
-        });
-
-        if(!user){
-            return null;
-        }
-
-        const fav_movies = without(user.myList, movie.id);
-
-        const updateduser = await db.user.update({
+        const list = await db.myList.findMany({
             where : {
-                id : user.id
+                userId : session.user.id
             },
-            data : {
-                myList : fav_movies
+            orderBy : {
+                createdAt : "desc"
             }
-        });
+        })
 
-        return updateduser;
+        return list;
 
     } catch (error) {
-        return null;
+        return []
     }
-}
+} 

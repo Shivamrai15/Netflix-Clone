@@ -32,7 +32,7 @@ export const SeriesList = async({
             <h1 className="text-lg md:text-[20px] text-white">{toTitle(genre)} Tv Shows</h1>
             <div className="w-full mt-3">
                 <Carousel
-                    className="h-full w-ful"
+                    className="h-full w-full"
                     opts={{
                         align: "start",
                     }}

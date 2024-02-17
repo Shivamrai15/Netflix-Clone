@@ -1,18 +1,24 @@
 "use client";
 
-import { Movies } from "@prisma/client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Season, Series } from "@prisma/client";
 import { FaPlay } from "react-icons/fa";
 import { MovieCardGerne } from "./movie-card-genre";
 import { MyListButton } from "./mylist-button";
 
-interface MovieCardProps {
-    data : Movies
+interface SeriesCardProps {
+    data : Series  & {
+        seasons : Season[]
+    };
 }
 
-export const MovieCard = ({
+export const SeriesCard = ({
     data
-} : MovieCardProps) => {
+} : SeriesCardProps) => {
+
+    const router = useRouter();
+
     return (
         <div className="group bg-neutral-900 col-span-1 relative h-[24vw] md:h-[18vw] lg:h-[12vw] xl:h-[11vw]">
             <Image
@@ -48,21 +54,21 @@ export const MovieCard = ({
                 <div className="z-10 bg-[#0f0f0f] p-2 lg:p-4 absolute w-full transition shadow-md rounded-b-md">
                     <div className="flex flex-row items-center gap-3">
                         <div
-                            onClick={()=>{}}
+                            onClick={()=>router.push(`/series/${data.id}`)}
                             className="md:cursor-pointer w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center transition hover:bg-neutral-300"
                         >
                             <FaPlay/>
                         </div>
-                        <MyListButton data={data} isSeries = {false} />
+                        <MyListButton data={data} isSeries = {true} />
                     </div>
                     <div className="flex flex-row mt-3 gap-2 items-center">
-                        <p className="text-white text-sm">{data.length}</p>
+                        <p className="text-white text-sm">{data.seasons.length} { data.seasons.length > 1 ? "Seasons" : "Season" }</p>
                     </div>
-                    <div className="flex flex-row mt-3 gap-2 items-center">
+                    <div className="flex flex-row mt-3 gap-2 items-center text-sm">
                         <MovieCardGerne genre={data.genre}/>
                     </div>
                 </div>
             </div>
         </div>
-    );
+    )
 }
