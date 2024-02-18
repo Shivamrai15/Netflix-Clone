@@ -1,15 +1,21 @@
 import { create } from "zustand";
-import { Movies, Season, Series } from "@prisma/client";
+import { Episode, Movies, Season, Series } from "@prisma/client";
 
 interface UseMyListModal {
     list : ( Movies | (Series & {
-        seasons : Season[]
+        seasons : (Season & {
+            episodes : Episode[]
+        })[]
     }) )[],
     createList : ( data : ( Movies | (Series & {
-        seasons : Season[]
+        seasons : (Season & {
+            episodes : Episode[]
+        })[]
     }) )[] ) => void;
     addContent : ( data : Movies | ( Series & {
-        seasons : Season[]
+        seasons : (Season & {
+            episodes : Episode[]
+        })[]
     }) ) => void;
     removeContent : ( id : string) => void;
 }
@@ -18,11 +24,15 @@ export const useMyList = create<UseMyListModal>((set, get) => ({
     list : [],
 
     createList : ( data : ( Movies | (Series & {
-        seasons : Season[]
+        seasons : (Season & {
+            episodes : Episode[]
+        })[]
     }) )[] ) => set({ list : data }),
 
     addContent : ( data : Movies | ( Series & {
-        seasons : Season[]
+        seasons : (Season & {
+            episodes : Episode[]
+        })[]
     }) ) => {
 
         const existingList = get().list;

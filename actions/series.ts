@@ -91,22 +91,3 @@ export const getSeries = async () => {
         return null;
     }
 }
-
-export const getSeriesWithSeasonsById = async (id : string) => {
-    try {
-        
-        const series = await db.series.findUnique({
-            where : {
-                id 
-            },
-            include : {
-                seasons: true
-            }
-        });
-
-        return series;
-
-    } catch (error) {
-        return null;
-    }
-}

@@ -3,7 +3,7 @@
 import { isEmpty } from "lodash";
 import { useEffect } from "react";
 import { useMyList } from "@/hooks/use-my-list";
-import { Movies, Season, Series } from "@prisma/client";
+import { Episode, Movies, Season, Series } from "@prisma/client";
 import { signOut } from "next-auth/react";
 
 import {
@@ -20,7 +20,9 @@ import { useRouter } from "next/navigation";
 
 interface ProfileProps {
     data : ( Movies | (Series & {
-        seasons : Season[]
+        seasons : (Season & {
+            episodes : Episode[]
+        })[]
     }))[];
 }
 

@@ -1,8 +1,11 @@
+"use client";
+
+import Image from "next/image";
 import { Movies } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { Info } from "lucide-react";
-import Image from "next/image";
 import { PlayButton } from "./play-button";
+import { useMoreInfoModal } from "@/hooks/use-more-info-modal";
 
 interface BillBoardProps {
     movie : Movies;
@@ -11,6 +14,14 @@ interface BillBoardProps {
 export const BillBoard = ({
     movie
 } : BillBoardProps) => {
+
+    const { onOpen, setInfo } = useMoreInfoModal();
+
+    const handleMoreInfo = () => {
+        setInfo(movie);
+        onOpen();
+    }
+
     return (
         <>
             <div className="relative h-[42vw]">
@@ -46,7 +57,11 @@ export const BillBoard = ({
                     </p>
                     <div className="flex flex-row items-center mt-4 gap-3">
                         <PlayButton movieId={movie.id} />
-                        <Button className="bg-white/25 hover:bg-white/20" size="sm">
+                        <Button
+                            className="bg-white/25 hover:bg-white/20"
+                            size="sm"
+                            onClick={handleMoreInfo}
+                        >
                             <Info className="mr-2"/>
                             More Info
                         </Button>
@@ -77,7 +92,11 @@ export const BillBoard = ({
                 </p>
                 <div className="flex flex-row items-center mt-4 gap-3">
                         <PlayButton movieId={movie.id} />
-                        <Button className="bg-white/25 hover:bg-white/20" size="sm">
+                        <Button
+                            className="bg-white/25 hover:bg-white/20"
+                            size="sm"
+                            onClick={handleMoreInfo}
+                        >
                             <Info className="mr-2"/>
                             More Info
                         </Button>

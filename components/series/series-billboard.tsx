@@ -1,18 +1,30 @@
-import { Season, Series, Video } from "@prisma/client";
+"use client";
+
+import { Episode, Season, Series, Video } from "@prisma/client";
 import { Info } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useMoreInfoModal } from "@/hooks/use-more-info-modal";
 
 interface SeriesBillboardProps {
     series : Series & {
-        seasons : Season[],
-        videos : Video[]
+        seasons : (Season & {
+            episodes : Episode[]
+        } )[],
     }
 }
 
 export const SeriesBillboard = ({
     series
 } : SeriesBillboardProps) => {
+
+    const { setInfo, onOpen } = useMoreInfoModal();
+
+    const handleMoreInfo = () => {
+        setInfo(series);
+        onOpen();
+    }
+
     return (
         <div className="md:h-screen">
             <div 
@@ -50,7 +62,10 @@ export const SeriesBillboard = ({
                             {series.description}
                         </p>
                         <div className="flex flex-row items-center mt-4 gap-3">
-                            <Button className="bg-white/25 hover:bg-white/20">
+                            <Button
+                                onClick={handleMoreInfo} 
+                                className="bg-white/25 hover:bg-white/20"
+                            >
                                 <Info className="mr-2"/>
                                 More Info
                             </Button>
@@ -82,7 +97,10 @@ export const SeriesBillboard = ({
                         {series.description}
                     </p>
                     <div className="flex flex-row items-center mt-4 gap-3">
-                            <Button className="bg-white/25 hover:bg-white/20" size="sm">
+                            <Button
+                                onClick={handleMoreInfo}
+                                className="bg-white/25 hover:bg-white/20" size="sm"
+                            >
                                 <Info className="mr-2"/>
                                 More Info
                             </Button>

@@ -1,13 +1,15 @@
 "use client"
 import { addToMyList, removeFromMyList } from '@/actions/favorite';
 import { useMyList } from '@/hooks/use-my-list';
-import { Movies, Season, Series } from '@prisma/client';
+import { Episode, Movies, Season, Series } from '@prisma/client';
 import { Check, Loader2, PlusIcon } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 interface FavMovieButtonProps {
     data : Movies | (Series & {
-        seasons : Season[]
+        seasons : (Season & {
+            episodes : Episode[]
+        })[]
     });
     isSeries : boolean;
 }

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FaPlay } from "react-icons/fa";
 import { MovieCardGerne } from "./movie-card-genre";
 import { MyListButton } from "./mylist-button";
+import { MoreInfoButton } from "./more-info-button";
 
 interface MovieCardProps {
     data : Movies
@@ -46,17 +47,22 @@ export const MovieCard = ({
                     </div>
                 </div>
                 <div className="z-10 bg-[#0f0f0f] p-2 lg:p-4 absolute w-full transition shadow-md rounded-b-md">
-                    <div className="flex flex-row items-center gap-3">
-                        <div
-                            onClick={()=>{}}
-                            className="md:cursor-pointer w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center transition hover:bg-neutral-300"
-                        >
-                            <FaPlay/>
+                    <div className="flex items-center justify-between">
+                        <div className="flex flex-row items-center gap-3">
+                            <div
+                                onClick={()=>{}}
+                                className="md:cursor-pointer w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center transition hover:bg-neutral-300"
+                            >
+                                <FaPlay/>
+                            </div>
+                            <MyListButton data={data} isSeries = {false} />
                         </div>
-                        <MyListButton data={data} isSeries = {false} />
+                        <MoreInfoButton data={data} />
                     </div>
-                    <div className="flex flex-row mt-3 gap-2 items-center">
-                        <p className="text-white text-sm">{data.length}</p>
+                    <div className="flex flex-row mt-6 gap-2 items-center">
+                        <p className="text-xs text-zinc-500 border border-zinc-400 px-1 py-0.5">{data.rating}</p>
+                        <p className="text-xs text-zinc-400">{data.length}</p>
+                        <p className="text-[9px] text-zinc-500 border border-zinc-400 px-1 rounded-sm">HD</p>
                     </div>
                     <div className="flex flex-row mt-3 gap-2 items-center">
                         <MovieCardGerne genre={data.genre}/>

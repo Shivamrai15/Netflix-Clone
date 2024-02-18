@@ -2,10 +2,10 @@ import Image from "next/image";
 import { NavbarItems } from "./navbar-items";
 import { MobileView } from "./mobile-nav";
 import { getMyList } from "@/actions/favorite";
-import { getSeriesWithSeasonsById } from "@/actions/series";
+import { getSeriesById } from "@/actions/series";
 import { getMovieByID } from "@/actions/movies";
 import { Profile } from "./profile";
-import { Movies, Season, Series } from "@prisma/client";
+import { Episode, Movies, Season, Series } from "@prisma/client";
 import { Search } from "./search";
 
 export const Navbar = async() => {
@@ -15,7 +15,7 @@ export const Navbar = async() => {
     const data = await Promise.all(
         myList.map( async(item) => {
             if (item.isSeries) {
-                const response = await getSeriesWithSeasonsById(item.contentId)
+                const response = await getSeriesById(item.contentId)
                 if (response) {
                     return response;
                 } else {
@@ -32,7 +32,9 @@ export const Navbar = async() => {
     );
 
     const filteredData : ( Movies | (Series & {
-        seasons : Season[]
+        seasons : (Season & {
+            episodes : Episode[]
+        })[]
     }))[] = [];
 
     data.map((value) => {
@@ -57,7 +59,6 @@ export const Navbar = async() => {
                     <NavbarItems href="/browse" label="Home"/>
                     <NavbarItems href="/tvshows" label="TV Shows"/>
                     <NavbarItems href="/movies" label="Movies"/>
-                    <NavbarItems href="/new-and-popular" label="New & Popular"/>
                     <NavbarItems href="/mylist" label="My List"/>
                 </div>
                 <div className="lg:hidden flex flex-row items-center gap-2 cursor-default relative">
