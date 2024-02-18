@@ -71,6 +71,7 @@ export const LoginForm = () => {
                                                 className="h-14 bg-neutral-900 text-white text-[15px] border-zinc-400"
                                                 type="email"
                                                 disabled ={isLoading}
+                                                autoComplete="off"
                                             />
                                         </FormControl>
                                         <FormMessage/>
@@ -89,6 +90,7 @@ export const LoginForm = () => {
                                                 className="h-14 bg-neutral-900 text-white text-[15px] border-zinc-400"
                                                 type="password"
                                                 disabled ={isLoading}
+                                                autoComplete="off"
                                             />
                                         </FormControl>
                                         <FormMessage/>

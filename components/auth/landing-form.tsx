@@ -49,6 +49,7 @@ export const LandingForm = () => {
                                     {...field}
                                     className="w-80 md:w-96 h-14 bg-neutral-900/70 text-white text-[16px]"
                                     placeholder="Email Address"
+                                    autoComplete="off"
                                 />
                             </FormControl>
                             <FormMessage/>
