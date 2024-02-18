@@ -4,6 +4,7 @@ import { isEmpty } from "lodash";
 import { useEffect } from "react";
 import { useMyList } from "@/hooks/use-my-list";
 import { Movies, Season, Series } from "@prisma/client";
+import { signOut } from "next-auth/react";
 
 import {
     DropdownMenu,
@@ -15,6 +16,7 @@ import {
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { LogOutIcon, Star } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface ProfileProps {
     data : ( Movies | (Series & {
@@ -28,6 +30,7 @@ export const Profile = ({
 
     const {createList} = useMyList();
     const session = useSession();
+    const router = useRouter();
 
     useEffect(()=>{
         if (!isEmpty(data)){
@@ -59,16 +62,22 @@ export const Profile = ({
                             {session.data?.user?.name}
                         </p>
                     </DropdownMenuLabel>
-                    <DropdownMenuItem className="text-zinc-200 focus:bg-neutral-950 focus:text-white">
+                    <DropdownMenuItem
+                        className="text-zinc-200 focus:bg-neutral-950 focus:text-white"
+                        onClick={()=>router.push("/mylist")}
+                    >
                         <Star className="h-5 w-5 mr-5" />
                         My List
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="text-zinc-200 focus:bg-neutral-950 focus:text-white">
+                    <DropdownMenuItem
+                        className="text-zinc-200 focus:bg-neutral-950 focus:text-white"
+                        onClick={()=>signOut()}
+                    >
                         <LogOutIcon className="h-5 w-5 mr-5" />
                         Logout
                     </DropdownMenuItem>
                 </DropdownMenuContent>
-            </DropdownMenu> 
+            </DropdownMenu>
         </div>
     )
 }

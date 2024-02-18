@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { NavbarItems } from "./navbar-items";
 import { MobileView } from "./mobile-nav";
-import { Search } from "lucide-react";
 import { getMyList } from "@/actions/favorite";
 import { getSeriesWithSeasonsById } from "@/actions/series";
 import { getMovieByID } from "@/actions/movies";
 import { Profile } from "./profile";
 import { Movies, Season, Series } from "@prisma/client";
+import { Search } from "./search";
 
 export const Navbar = async() => {
 
@@ -60,13 +60,11 @@ export const Navbar = async() => {
                     <NavbarItems href="/new-and-popular" label="New & Popular"/>
                     <NavbarItems href="/mylist" label="My List"/>
                 </div>
-                <div className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-default relative">
+                <div className="lg:hidden flex flex-row items-center gap-2 cursor-default relative">
                     <MobileView/>
                 </div>
                 <div className="flex flex-row ml-auto gap-5 items-center">
-                    <div className="text-gray-200 hover:text-gray-300 md:cursor-pointer transition">
-                        <Search/>
-                    </div>
+                    <Search />
                     <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-md overflow-hidden relative flex items-center justify-center">
                         <Profile data = {filteredData} />
                     </div>
