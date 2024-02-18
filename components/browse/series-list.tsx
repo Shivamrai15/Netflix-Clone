@@ -1,9 +1,11 @@
-import { Season, Series } from "@prisma/client"
+import { Episode, Season, Series } from "@prisma/client"
 import { SeriesCard } from "./series-card";
 
 interface SeriesListProps {
     data : (Series & {
-        seasons : Season[]
+        seasons : (Season & {
+            episodes : Episode[]
+        })[],
     })[];
     title : string;
 }

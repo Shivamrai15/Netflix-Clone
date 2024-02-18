@@ -77,7 +77,15 @@ export const getSeries = async () => {
                 }
             },
             include : {
-                seasons: true
+                seasons: {
+                    include : {
+                        episodes : {
+                            orderBy : {
+                                number : "asc"
+                            }
+                        }
+                    }
+                }
             },
             orderBy : {
                 imdb : "desc"

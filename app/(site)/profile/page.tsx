@@ -17,7 +17,7 @@ const ProfilePage = () => {
         <div className="h-full w-full bg-neutral-900 flex items-center justify-center">
             <div className="flex flex-col">
                 <h1 className="text-3xl md:text-4xl text-white font-medium text-center">
-                    Who's watching?
+                    Who&apos;s watching?
                 </h1>
                 <div className="flex items-center justify-center gap-8 mt-10">
                     <Link
