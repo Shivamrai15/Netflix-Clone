@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useMyList } from "@/hooks/use-my-list";
 import { Episode, Movies, Season, Series } from "@prisma/client";
 import { signOut } from "next-auth/react";
+import { useRouter as Router } from "@/hooks/useRouter";
 
 import {
     DropdownMenu,
@@ -33,6 +34,7 @@ export const Profile = ({
     const {createList} = useMyList();
     const session = useSession();
     const router = useRouter();
+    const { setPropogation } = Router();
 
     useEffect(()=>{
         if (!isEmpty(data)){
@@ -66,7 +68,10 @@ export const Profile = ({
                     </DropdownMenuLabel>
                     <DropdownMenuItem
                         className="text-zinc-200 focus:bg-neutral-950 focus:text-white"
-                        onClick={()=>router.push("/mylist")}
+                        onClick={()=>{
+                            router.push("/mylist");
+                            setPropogation(30);
+                        }}
                     >
                         <Star className="h-5 w-5 mr-5" />
                         My List

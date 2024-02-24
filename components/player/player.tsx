@@ -7,10 +7,12 @@ import { useEffect, useState } from "react";
 
 interface PlayerProps {
     url : string;
+    poster : string; 
 }
 
 export const Player = ({
-    url
+    url,
+    poster
 } : PlayerProps) => {
 
     const router = useRouter();
@@ -31,6 +33,7 @@ export const Player = ({
             <video
                 autoPlay = {true}
                 src={url}
+                poster={poster}
                 controls
                 className="w-full h-full"
                 disablePictureInPicture

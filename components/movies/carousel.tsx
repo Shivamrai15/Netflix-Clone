@@ -13,12 +13,14 @@ import {
 import Image from "next/image";
 import { Movies } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import { useRouter as Router } from "@/hooks/useRouter";
 
 export const CarouselSlider = ({
     data
 } : CrousalProps) => {
 
     const router = useRouter();
+    const { setPropogation } = Router();
 
     return (
         <Carousel
@@ -33,7 +35,10 @@ export const CarouselSlider = ({
                                 <CarouselItem
                                     key={item.id}
                                     className="basis-auto md:cursor-pointer"
-                                    onClick={() => router.push(`/title/${item.id}`)}
+                                    onClick={() => {
+                                        router.push(`/title/${item.id}`);
+                                        setPropogation(30);
+                                    }}
                                 >
                                     <div
                                         className="overflow-hidden"

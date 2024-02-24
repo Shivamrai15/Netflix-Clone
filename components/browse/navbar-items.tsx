@@ -20,7 +20,7 @@ export const NavbarItems = ({
 
     const handleNavigation = ()=>{
         if (pathname !== href){
-            setPropogation(70);
+            setPropogation(30);
         }
     }
 

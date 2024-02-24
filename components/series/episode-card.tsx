@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { Episode } from "@prisma/client";
 import Image from "next/image";
+import { useRouter as Router } from "@/hooks/useRouter";
 
 interface EpisodeCardProps {
     episode : Episode;
@@ -12,12 +13,16 @@ export const EpisodeCard = ({
 } : EpisodeCardProps) => {
 
     const router = useRouter();
+    const { setPropogation } = Router();
 
     return (
         <div className='w-full flex flex-col gap-2'>
             <div
                 className="aspect-video relative w-full md:cursor-pointer"
-                onClick={() => router.push(`/watch/${episode.id}?tvshow=true`)}
+                onClick={() => {
+                    router.push(`/watch/${episode.id}?tvshow=true`);
+                    setPropogation(30);
+                }}
             >
                 <Image
                     src={episode.thumbnail}

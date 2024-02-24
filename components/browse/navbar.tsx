@@ -46,7 +46,7 @@ export const Navbar = async() => {
     return (
         <nav className="w-full fixed z-40 top-0">
             <div
-                className="px-4 md:px-16 py-2 md:py-4 flex items-center transition duration-500 bg-neutral-950"                
+                className="px-4 md:px-16 py-2 md:py-4 flex items-center transition duration-500 bg-neutral-950/85"                
             >
                 <Image
                     src="/logo.png"

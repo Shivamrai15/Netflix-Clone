@@ -1,11 +1,13 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Movies } from "@prisma/client";
 import Image from "next/image";
 import { FaPlay } from "react-icons/fa";
 import { MovieCardGerne } from "./movie-card-genre";
 import { MyListButton } from "./mylist-button";
 import { MoreInfoButton } from "./more-info-button";
+import { useRouter as Router } from "@/hooks/useRouter";
 
 interface MovieCardProps {
     data : Movies
@@ -14,6 +16,10 @@ interface MovieCardProps {
 export const MovieCard = ({
     data
 } : MovieCardProps) => {
+
+    const router = useRouter();
+    const { setPropogation } = Router()
+
     return (
         <div className="group bg-neutral-900 col-span-1 relative h-[24vw] md:h-[18vw] lg:h-[12vw] xl:h-[11vw]">
             <Image
@@ -50,7 +56,10 @@ export const MovieCard = ({
                     <div className="flex items-center justify-between">
                         <div className="flex flex-row items-center gap-3">
                             <div
-                                onClick={()=>{}}
+                                onClick={()=>{
+                                    router.push(`/watch/${data.id}?movie=true`);
+                                    setPropogation(30);
+                                }}
                                 className="md:cursor-pointer w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center transition hover:bg-neutral-300"
                             >
                                 <FaPlay/>

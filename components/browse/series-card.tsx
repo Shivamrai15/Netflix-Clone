@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Episode, Season, Series } from "@prisma/client";
+import { useRouter as Router } from "@/hooks/useRouter"
 import { FaPlay } from "react-icons/fa";
 import { MovieCardGerne } from "./movie-card-genre";
 import { MyListButton } from "./mylist-button";
@@ -21,6 +22,7 @@ export const SeriesCard = ({
 } : SeriesCardProps) => {
 
     const router = useRouter();
+    const { setPropogation } = Router()
 
     return (
         <div className="group bg-neutral-900 col-span-1 relative h-[24vw] md:h-[18vw] lg:h-[12vw] xl:h-[11vw]">
@@ -58,7 +60,10 @@ export const SeriesCard = ({
                     <div className="flex items-center justify-between">
                         <div className="flex flex-row items-center gap-3">
                             <div
-                                onClick={()=>router.push(`/series/${data.id}`)}
+                                onClick={()=>{
+                                    router.push(`/series/${data.id}`);
+                                    setPropogation(30);
+                                }}
                                 className="md:cursor-pointer w-6 h-6 md:w-8 md:h-8 bg-white rounded-full flex items-center justify-center transition hover:bg-neutral-300"
                             >
                                 <FaPlay/>

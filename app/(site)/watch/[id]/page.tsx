@@ -23,7 +23,7 @@ const WatchPage = async({
 
     return (
         <div className="w-full h-full bg-black" >
-            <Player url={content.url} />
+            <Player url={content.url} poster={content.thumbnail} />
         </div>
     )
 }
