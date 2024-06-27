@@ -137,10 +137,12 @@ export const Player = ({
     }, []);
 
     const debounce = (func: Function, wait: number) => {
+        // @ts-ignore
         let timeout:Timer;
         return (...args: any) => {
-          clearTimeout(timeout);
-          timeout = setTimeout(() => func(...args), wait);
+            // @ts-ignore
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func(...args), wait);
         };
     };
     
