@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/dialog";
 import { usePlayerModal } from "@/hooks/use-player-modal";
 import { X } from "lucide-react";
+import { Player } from "./player";
 
 export const PlayerModal = () => {
 
@@ -30,16 +31,10 @@ export const PlayerModal = () => {
                     />
                 </div>
                 <div className="aspect-video overflow-hidden w-full">
-                    <video
-                        src={data.url}
+                    <Player
                         poster={data.poster}
-                        controls
-                        autoPlay
-                        className="w-full h-full"
-                        disablePictureInPicture
-                        controlsList="nodownload noplaybackrate"
-                    >
-                    </video>
+                        url={data.url}
+                    />
                 </div>
             </DialogContent>
         </Dialog>
