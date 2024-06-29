@@ -10,7 +10,7 @@ import { ModalProvider } from '@/providers/modal-provider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: 'Netflix - Watch TV Shows Online, Watch Movies Online',
+    title: 'Netflix Clone - Watch TV Shows Online, Watch Movies Online',
     keywords : [
         "watch movies",
         "movies online",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         "no download",
         "full length movies"
     ],
-    description: 'Watch Netflix movies & TV shows online or stream right to your smart TV, game console, PC, Mac, mobile, tablet and more.',
+    description: 'Watch Netflix Clone movies & TV shows online or stream right to your smart TV, game console, PC, Mac, mobile, tablet and more.',
 }
 
 
